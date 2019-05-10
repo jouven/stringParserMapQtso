@@ -1,0 +1,15 @@
+//because windows sucks...
+
+#ifndef STRINGPARSERMAPQTSO_CROSSPLATFORMMACROS_HPP
+#define STRINGPARSERMAPQTSO_CROSSPLATFORMMACROS_HPP
+
+#include <QtCore/QtGlobal>
+
+//remember to define this variable in the .pro file
+#if defined(STRINGPARSERMAPQTSO_LIB)
+#  define EXPIMP_STRINGPARSERMAPQTSO Q_DECL_EXPORT
+#else
+#  define EXPIMP_STRINGPARSERMAPQTSO Q_DECL_IMPORT
+#endif
+
+#endif // STRINGPARSERMAPQTSO_CROSSPLATFORMMACROS_HPP
