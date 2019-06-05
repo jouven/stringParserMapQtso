@@ -26,7 +26,7 @@ private:
     QString replaceValueOrFormat_pri;
     //false = localtime
     bool useUTC_pri = false;
-protected:
+//protected:
     void derivedExecute_f(QString* string_par) override;
     //does nothing
     void derivedStop_f() override;
@@ -46,6 +46,7 @@ public:
             //for the basic "replace string with string"
             //since default QString has is isnull = true, that can be checked to not replace anything
         , const QString& replaceValueOrFormat_par_con = QString()
+        , const bool useUTC_par_con = false
     );
 
     static EXPIMP_STRINGPARSERMAPQTSO const QMap<QString, replaceType_ec> strToReplaceTypeMap_sta_con;

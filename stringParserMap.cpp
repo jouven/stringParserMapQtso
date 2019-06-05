@@ -83,10 +83,11 @@ int stringParserMap_c::removeParser_f(
         const int_fast64_t index_par_con
         , const bool destroyToo_par_con)
 {
+    int resultTmp(0);
     parserBase_c* objTmp(orderToParserBaseMap_pri.value(index_par_con, nullptr));
-    int resultTmp(orderToParserBaseMap_pri.remove(index_par_con));
     if (objTmp not_eq nullptr)
     {
+        resultTmp = orderToParserBaseMap_pri.remove(index_par_con);
         stringTriggerToOrderMap_pri.remove(objTmp->stringTrigger_f());
         if (destroyToo_par_con)
         {
@@ -174,7 +175,7 @@ bool stringParserMap_c::changeParserIndex_f(
     return anyChangeResultTmp;
 }
 
-void stringParserMap_c::executeForString(QString* string_par)
+void stringParserMap_c::executeForString_f(QString* string_par)
 {
     QMap<int_fast64_t, parserBase_c*>::const_iterator iteratorTmp(orderToParserBaseMap_pri.constBegin());
     while (iteratorTmp not_eq orderToParserBaseMap_pri.constEnd())
@@ -213,7 +214,7 @@ void stringParserMap_c::read_f(const QJsonObject& json_par_con)
         bool rightTypeFoundTmp(false);
         while (true)
         {
-            if (parserBase_c::strToTypeMap_sta_con.value(actionDataJsonObject["type"].toString()) == parserBase_c::type_ec::stringReplace)
+            if (parserBase_c::strToTypeMap_sta_con.value(actionDataJsonObject["type"].toString().toLower()) == parserBase_c::type_ec::stringReplace)
             {
                 stringReplacer_c* stringReplacerTmp(new stringReplacer_c);
                 parserTmp = stringReplacerTmp;
@@ -233,6 +234,18 @@ void stringParserMap_c::read_f(const QJsonObject& json_par_con)
 #endif
         }
     }
+}
+
+void stringParserMap_c::clear_f()
+{
+    QMap<int_fast64_t, parserBase_c*>::const_iterator iteratorTmp(orderToParserBaseMap_pri.constBegin());
+    while (iteratorTmp not_eq orderToParserBaseMap_pri.constEnd())
+    {
+        iteratorTmp.value()->deleteLater();
+        ++iteratorTmp;
+    }
+    orderToParserBaseMap_pri.clear();
+    stringTriggerToOrderMap_pri.clear();
 }
 
 stringParserMap_c* stringParserMap_ptr_ext = nullptr;

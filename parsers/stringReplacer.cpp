@@ -84,7 +84,7 @@ void stringReplacer_c::derivedWrite_f(QJsonObject& json_ref_par) const
 void stringReplacer_c::derivedRead_f(const QJsonObject& json_par_con)
 {
     replaceValueOrFormat_pri = json_par_con["replaceValueOrFormat"].toString();
-    replaceType_pri = strToReplaceTypeMap_sta_con.value(json_par_con["replaceType"].toString());
+    replaceType_pri = strToReplaceTypeMap_sta_con.value(json_par_con["replaceType"].toString().toLower());
     useUTC_pri = json_par_con["useUTC"].toBool();
 }
 
@@ -111,10 +111,7 @@ QString stringReplacer_c::derivedValueFormat_f()
 
 stringReplacer_c* stringReplacer_c::derivedClone_f() const
 {
-    stringReplacer_c* copyPtr(new stringReplacer_c);
-    copyPtr->replaceType_pri = this->replaceType_pri;
-    copyPtr->replaceValueOrFormat_pri = this->replaceValueOrFormat_pri;
-    copyPtr->useUTC_pri  = this->useUTC_pri;
+    stringReplacer_c* copyPtr(new stringReplacer_c(this->stringTrigger_f(), this->replaceType_pri, this->replaceValueOrFormat_pri));
     //this could be ""optimized"" only copying the relevant fields depending on the replace type
     return copyPtr;
 }
@@ -122,8 +119,10 @@ stringReplacer_c* stringReplacer_c::derivedClone_f() const
 stringReplacer_c::stringReplacer_c(
         const QString& triggerString_par_con
         , const stringReplacer_c::replaceType_ec replaceType_par_con
-        , const QString& replaceValueOrFormat_par_con)
+        , const QString& replaceValueOrFormat_par_con
+        , const bool useUTC_par_con)
     : parserBase_c(parserBase_c::type_ec::stringReplace, triggerString_par_con)
     , replaceType_pri(replaceType_par_con)
     , replaceValueOrFormat_pri(replaceValueOrFormat_par_con)
+    , useUTC_pri(useUTC_par_con)
 {}

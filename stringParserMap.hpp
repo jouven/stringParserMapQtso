@@ -15,7 +15,7 @@
 //for convenience
 #define PARSESTR(STR) if (stringParserMap_ptr_ext not_eq nullptr) \
 { \
-    stringParserMap_ptr_ext->executeForString(STR); \
+    stringParserMap_ptr_ext->executeForString_f(STR); \
 }
 
 class EXPIMP_STRINGPARSERMAPQTSO stringParserMap_c : public QObject, public baseClassQt_c
@@ -39,12 +39,14 @@ public:
     //"newIndex" beyond "size-index" will be treated as "size-index"
     bool changeParserIndex_f(const int_fast64_t sourceIndex_par_con, const int_fast64_t newIndex_par_con);
 
-    void executeForString(QString* string_par);
+    void executeForString_f(QString* string_par);
 
     QMap<int_fast64_t, parserBase_c*> orderToParserBaseMap_f() const;
 
     void write_f(QJsonObject &json_ref_par) const;
     void read_f(const QJsonObject &json_par_con);
+
+    void clear_f();
 };
 //more convenience
 extern EXPIMP_STRINGPARSERMAPQTSO stringParserMap_c* stringParserMap_ptr_ext;

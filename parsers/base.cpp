@@ -47,7 +47,7 @@ void parserBase_c::read_f(const QJsonObject& json_par_con)
 {
     stringTrigger_pri = json_par_con["stringTrigger"].toString();
     enabled_pri = json_par_con["enabled"].toBool();
-    type_pri = strToTypeMap_sta_con.value(json_par_con["type"].toString());
+    type_pri = strToTypeMap_sta_con.value(json_par_con["type"].toString().toLower());
     derivedRead_f(json_par_con);
 }
 
