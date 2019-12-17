@@ -22,7 +22,9 @@ class EXPIMP_STRINGPARSERMAPQTSO stringParserMap_c : public QObject, public base
 {
     Q_OBJECT
 
+    //key is order, value is parser
     QMap<int_fast64_t, parserBase_c*> orderToParserBaseMap_pri;
+    //key is string trigger, value is order
     QHash<QString, int_fast64_t> stringTriggerToOrderMap_pri;
 public:
     stringParserMap_c() = default;
@@ -44,6 +46,8 @@ public:
     QMap<int_fast64_t, parserBase_c*> orderToParserBaseMap_f() const;
 
     void write_f(QJsonObject &json_ref_par) const;
+    //existing parsers are kept and "read" are appended,
+    //if there is a string trigger conflict the new read replaces the old
     void read_f(const QJsonObject &json_par_con);
 
     void clear_f();

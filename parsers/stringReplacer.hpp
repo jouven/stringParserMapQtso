@@ -9,6 +9,7 @@
 
 #include <unordered_map>
 
+//replace string with another string
 class EXPIMP_STRINGPARSERMAPQTSO stringReplacer_c : public parserBase_c
 {
     Q_OBJECT
@@ -16,9 +17,9 @@ class EXPIMP_STRINGPARSERMAPQTSO stringReplacer_c : public parserBase_c
 public:
     enum class replaceType_ec
     {
-        empty
-        , string
-        , currentDatetimeString
+        empty = 0
+        , string = 1
+        , currentDatetimeString = 2
     };
 private:
     replaceType_ec replaceType_pri = replaceType_ec::empty;

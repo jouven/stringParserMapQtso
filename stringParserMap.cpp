@@ -227,8 +227,20 @@ void stringParserMap_c::read_f(const QJsonObject& json_par_con)
         {
             parserTmp->setParent(this);
             parserTmp->read_f(actionDataJsonObject);
-            stringTriggerToOrderMap_pri.insert(parserTmp->stringTrigger_f(), orderToParserBaseMap_pri.size());
-            orderToParserBaseMap_pri.insert(orderToParserBaseMap_pri.size(), parserTmp);
+            QHash<QString, int_fast64_t>::const_iterator findResultTmp(stringTriggerToOrderMap_pri.find(parserTmp->stringTrigger_f()));
+            //if an object using the same string trigger is found
+            //replace the parser
+            if (findResultTmp not_eq stringTriggerToOrderMap_pri.end())
+            {
+                orderToParserBaseMap_pri.insert(findResultTmp.value(), parserTmp);
+            }
+            else
+            //insert
+            {
+                stringTriggerToOrderMap_pri.insert(parserTmp->stringTrigger_f(), orderToParserBaseMap_pri.size());
+                orderToParserBaseMap_pri.insert(orderToParserBaseMap_pri.size(), parserTmp);
+            }
+
 #ifdef DEBUGJOUVEN
             //qDebug() << "" << endl;
 #endif

@@ -12,7 +12,7 @@
 
 #include <unordered_map>
 
-//QObject right now it's inherited just because it's easier to manage QObjects instead of plain "new class C/C++ objects", for the:
+//QObject right now it's inherited just because "virtual" and it's easier to manage QObjects instead of plain "new class C/C++ objects", for the:
 //setParent, deleteLater...
 class EXPIMP_STRINGPARSERMAPQTSO parserBase_c : public QObject, public baseClassQt_c
 {
@@ -21,9 +21,13 @@ class EXPIMP_STRINGPARSERMAPQTSO parserBase_c : public QObject, public baseClass
 public:
     enum class type_ec
     {
-        base = 0
-        , stringReplace = 1
+        empty = 0
+        , base = 1
+        , stringReplace = 2
     };
+
+    static EXPIMP_STRINGPARSERMAPQTSO const QMap<QString, type_ec> strToTypeMap_sta_con;
+    static EXPIMP_STRINGPARSERMAPQTSO const std::unordered_map<type_ec, QString> typeToStrUMap_sta_con;
 //    enum class executionState_ec
 //    {
 //        initial = 0
@@ -66,9 +70,6 @@ public:
     void execute_f(QString* string_par);
 
     void stop_f();
-
-    static EXPIMP_STRINGPARSERMAPQTSO const QMap<QString, type_ec> strToTypeMap_sta_con;
-    static EXPIMP_STRINGPARSERMAPQTSO const std::unordered_map<type_ec, QString> typeToStrUMap_sta_con;
 
     QString stringTrigger_f() const;
     //returns the value, format or some kind of representation of the end result of the parsing

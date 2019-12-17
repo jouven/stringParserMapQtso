@@ -85,7 +85,10 @@ void stringReplacer_c::derivedRead_f(const QJsonObject& json_par_con)
 {
     replaceValueOrFormat_pri = json_par_con["replaceValueOrFormat"].toString();
     replaceType_pri = strToReplaceTypeMap_sta_con.value(json_par_con["replaceType"].toString().toLower());
-    useUTC_pri = json_par_con["useUTC"].toBool();
+    if (json_par_con["useUTC"].isBool())
+    {
+        useUTC_pri = json_par_con["useUTC"].toBool();
+    }
 }
 
 QString stringReplacer_c::derivedValueFormat_f()
