@@ -12,6 +12,8 @@
 #include <QHash>
 #include <QJsonObject>
 
+#include <vector>
+
 //for convenience
 #define PARSESTR(STR) if (stringParserMap_ptr_ext not_eq nullptr) \
 { \
@@ -51,6 +53,9 @@ public:
     void read_f(const QJsonObject &json_par_con);
 
     void clear_f();
+
+    //returns a vectors of the stringTriggers already in use
+    std::vector<QString> stringTriggers_f() const;
 };
 //more convenience
 extern EXPIMP_STRINGPARSERMAPQTSO stringParserMap_c* stringParserMap_ptr_ext;

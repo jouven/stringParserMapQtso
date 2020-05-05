@@ -260,4 +260,9 @@ void stringParserMap_c::clear_f()
     stringTriggerToOrderMap_pri.clear();
 }
 
+std::vector<QString> stringParserMap_c::stringTriggers_f() const
+{
+    return stringTriggerToOrderMap_pri.keys().toVector().toStdVector();
+}
+
 stringParserMap_c* stringParserMap_ptr_ext = nullptr;
