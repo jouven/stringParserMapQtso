@@ -260,9 +260,40 @@ void stringParserMap_c::clear_f()
     stringTriggerToOrderMap_pri.clear();
 }
 
-std::vector<QString> stringParserMap_c::stringTriggers_f() const
+QList<QString> stringParserMap_c::stringTriggers_f() const
 {
-    return stringTriggerToOrderMap_pri.keys().toVector().toStdVector();
+    return stringTriggerToOrderMap_pri.keys();
 }
 
-stringParserMap_c* stringParserMap_ptr_ext = nullptr;
+QString stringParserMap_c::parseString_f(const QString& string_par_con, stringParserMap_c* stringParserMap_par)
+{
+    if (stringParserMap_par not_eq nullptr)
+    {
+        QString copyStrTmp(string_par_con);
+        stringParserMap_par->executeForString_f(std::addressof(copyStrTmp));
+        return copyStrTmp;
+    }
+    else
+    {
+        return string_par_con;
+    }
+}
+
+QStringList stringParserMap_c::parseStringList_f(const QStringList& stringList_par_con, stringParserMap_c* stringParserMap_par)
+{
+
+    if (stringParserMap_par not_eq nullptr)
+    {
+        QStringList copyStrListTmp(stringList_par_con);
+        for (QString& str_ite : copyStrListTmp)
+        {
+           stringParserMap_par->executeForString_f(std::addressof(str_ite));
+        }
+        return copyStrListTmp;
+    }
+    else
+    {
+        return stringList_par_con;
+    }
+}
+

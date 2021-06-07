@@ -8,17 +8,12 @@
 
 #include <QObject>
 #include <QString>
+#include <QStringList>
 #include <QMap>
 #include <QHash>
 #include <QJsonObject>
 
 #include <vector>
-
-//for convenience
-#define PARSESTR(STR) if (stringParserMap_ptr_ext not_eq nullptr) \
-{ \
-    stringParserMap_ptr_ext->executeForString_f(STR); \
-}
 
 class EXPIMP_STRINGPARSERMAPQTSO stringParserMap_c : public QObject, public baseClassQt_c
 {
@@ -55,9 +50,10 @@ public:
     void clear_f();
 
     //returns a vectors of the stringTriggers already in use
-    std::vector<QString> stringTriggers_f() const;
+    QList<QString> stringTriggers_f() const;
+
+    static QString parseString_f(const QString& string_par_con, stringParserMap_c* stringParserMap_par);
+    static QStringList parseStringList_f(const QStringList& stringList_par_con, stringParserMap_c* stringParserMap_par);
 };
-//more convenience
-extern EXPIMP_STRINGPARSERMAPQTSO stringParserMap_c* stringParserMap_ptr_ext;
 
 #endif // STRINGPARSERMAPQTSO_STRINGPARSERMAP_HPP

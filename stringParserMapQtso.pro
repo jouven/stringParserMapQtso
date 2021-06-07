@@ -51,7 +51,7 @@ CONFIG(release, debug|release){
 }
 #debug
 CONFIG(debug, debug|release){
-    LIBS += -L$${MYPATH}home/jouven/mylibs/debug/ -lbackwardSTso -lessentialQtso
+    LIBS += -L$${MYPATH}home/jouven/mylibs/debug/ -lessentialQtso
     DEPENDPATH += $${MYPATH}home/jouven/mylibs/debug
     QMAKE_RPATHDIR += $${MYPATH}home/jouven/mylibs/debug
     DEFINES += DEBUGJOUVEN
